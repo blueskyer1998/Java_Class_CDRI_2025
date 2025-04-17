@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h1>今彩 539 電腦選號</h1>
+	<h1>今彩 539 電腦選號HI</h1>
 	<h2>
 		<%--顯示 servlet 傳遞過來的資料 --%>
 		${ numbers }
