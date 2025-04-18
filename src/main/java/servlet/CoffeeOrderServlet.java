@@ -27,10 +27,15 @@ public class CoffeeOrderServlet extends HttpServlet {
 		String sugar = req.getParameter("sugar");
 
 		// 判斷參數
+		if(type == null || size == null || sugar == null) {
+			resp.getWriter().print("參數輸入不正確");
+			return;
+		}
+		
 		String[] typearry = { "latte", "mocha", "americano", "cappuccino" };
 		String[] sizearry = { "s", "m", "l" };
 		String[] sugararry = { "yes", "no" };
-
+		
 		if (!(Arrays.asList(typearry).contains(type.toLowerCase()) && Arrays.asList(sizearry).contains(size.toLowerCase())
 				&& Arrays.asList(sugararry).contains(sugar))) {
 			resp.getWriter().print("參數輸入不正確");
@@ -42,7 +47,7 @@ public class CoffeeOrderServlet extends HttpServlet {
 		//resp.getWriter().print(coffeeOrder.getInfo());
 		
 		// 建立分派器
-		RequestDispatcher rd = req.getRequestDispatcher("coffee_order.jsp");
+		RequestDispatcher rd = req.getRequestDispatcher("/WEB-INF/coffee_order.jsp");
 		req.setAttribute("coffeeOrder", coffeeOrder);
 		rd.forward(req, resp);
 	}
