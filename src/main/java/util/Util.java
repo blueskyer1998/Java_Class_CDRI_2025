@@ -11,4 +11,13 @@ public class Util {
 			return false;
 		}
 	}
+	
+	public boolean isInt(String data) {
+		try {
+			Integer.parseInt(data);
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
+	}
 }
