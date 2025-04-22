@@ -36,7 +36,12 @@
 								<td>
 									<fmt:formatNumber value="${ iceOrder.totalPrice }" type="currency" maxFractionDigits="0" />
 								</td>
-								<td title="按我一下刪除" style="cursor: pointer;">❌</td>
+								<td>
+								    <form action="/JavaWeb/ice" method="post" style="margin:0">
+								        <input type="hidden" name="orderindex" value="${ i.index }" />
+								        <button type="submit" class="pure-button" title="刪除" onclick="return confirm('確定要刪除這筆訂單嗎？')">❌</button>
+								    </form>
+								</td>
 							</tr>
 							<!-- 累加總價 -->
 							<c:set var="totalPriceSum" value="${ totalPriceSum + iceOrder.totalPrice }" />

@@ -24,14 +24,21 @@ public class IceDessertServlet extends HttpServlet {
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		req.setCharacterEncoding("UTF-8");
-		// 接收表單參數
-		String mainDishName = req.getParameter("mainDish");
-		String[] toppingArray = req.getParameterValues("toppings");
-		// 建立 IceOrder
-		IceOrder iceOrder = new IceOrder(mainDishName, toppingArray);
-		// 加入到訂單集合
-		iceOrders.add(iceOrder);
+		req.setCharacterEncoding("UTF-8");		
+		String orderIndex = req.getParameter("orderindex");
+		if (orderIndex != null) {
+			iceOrders.remove(Integer.parseInt(orderIndex));
+			req.setAttribute("iceOrders", iceOrders);
+		} else {
+			// 接收表單參數
+			String mainDishName = req.getParameter("mainDish");
+			String[] toppingArray = req.getParameterValues("toppings");
+			// 建立 IceOrder
+			IceOrder iceOrder = new IceOrder(mainDishName, toppingArray);
+			// 加入到訂單集合
+			iceOrders.add(iceOrder);
+		}
+		
 		// 重導到 jsp
 		RequestDispatcher rd = req.getRequestDispatcher("/WEB-INF/ice_dessert_result.jsp");
 		req.setAttribute("iceOrders", iceOrders);
