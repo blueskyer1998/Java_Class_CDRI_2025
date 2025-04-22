@@ -22,7 +22,7 @@ public class CoffeeOrder {
 		this.type = type;
 		this.size = size;
 		this.sugar = Boolean.parseBoolean(sugar);
-		this.price = priceTable.get(type.toLowerCase()).get(size.toUpperCase());
+		this.price = priceTable.get(type.toLowerCase()).get(size);
 	}
 	
 	public String getInfo() {
@@ -30,7 +30,7 @@ public class CoffeeOrder {
 		String sugarText = sugarTable.get(sugar);	
 		return String.format("您點了一杯 %s杯 %s 咖啡（%s）價格：%d 元", sizeText, type, sugarText, price);
 	}
-	
+
 	public String getType() {
 		return type;
 	}
