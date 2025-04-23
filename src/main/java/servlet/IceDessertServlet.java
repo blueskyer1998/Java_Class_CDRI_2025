@@ -25,10 +25,18 @@ public class IceDessertServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");		
+		
+		// ✅ 驗證 CAPTCHA
+		String captchaToken = req.getParameter("captchaToken");
+		if (captchaToken == null || captchaToken.trim().isEmpty()) {
+			req.setAttribute("captchaError", "請先完成 CAPTCHA 驗證！");
+			req.getRequestDispatcher("/WEB-INF/ice_dessert_form.jsp").forward(req, resp);
+			return;
+		}
+		
 		String orderIndex = req.getParameter("orderindex");
 		if (orderIndex != null) {
 			iceOrders.remove(Integer.parseInt(orderIndex));
-			req.setAttribute("iceOrders", iceOrders);
 		} else {
 			// 接收表單參數
 			String mainDishName = req.getParameter("mainDish");
